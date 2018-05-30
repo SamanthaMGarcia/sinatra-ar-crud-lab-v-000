@@ -13,17 +13,18 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/posts' do
-    @post = Post.create(params)
+    @post = self.create(params)
     redirect to '/posts'
   end
 
   get '/posts' do
-    @posts = Post.all
+    @posts = self.all
     erb :index
   end
 
   get '/posts/:id' do
-    
+    @post = self.find_by_id(params[:id])
+    erb :edit
   end
 
 end
